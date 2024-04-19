@@ -1,0 +1,30 @@
+/* Animación de entrada */
+.animate-left-to-right {
+  animation: slideIn 0.5s forwards;
+  left: -100%;
+}
+
+/* Animación de salida */
+.animate-right-to-left {
+  animation: slideOut 0.5s forwards;
+}
+
+/* Keyframes para la animación 'slideIn' */
+@keyframes slideIn {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 0;
+  }
+}
+
+/* Keyframes para la animación 'slideOut' */
+@keyframes slideOut {
+  from {
+    left: 0;
+  }
+  to {
+    left: -100%;
+  }
+}
