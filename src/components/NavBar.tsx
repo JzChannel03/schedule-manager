@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import {
   Button,
+  Checkbox,
   Modal,
   ModalBody,
   ModalContent,
@@ -9,23 +10,33 @@ import {
   Select,
   SelectItem,
   useDisclosure,
+  Textarea,
+  TimeInput,
 } from "@nextui-org/react";
 import useDrawer from "../hooks/useDrawer";
-
-function CustomInput() {
-  return <input type="text" className="shadow-lg p-2 rounded-lg" />;
-}
+import { Time } from "@internationalized/date";
 
 function EachPersonForm() {
   return (
-    <div className="p-4 border-1 border-solid border-black flex flex-col gap-2 rounded-lg shadow-lg">
-      <h3>Juan de los Claveles</h3>
-      <label>Tiempo trabajado:</label>
-      <CustomInput />
-      <label>Ausente?</label>
-      <CustomInput />
-      <label>Quejas:</label>
-      <CustomInput />
+    <div className="m-auto w-11/12 p-4 flex flex-col gap-2 rounded-lg shadow-md">
+      <h4>Juan de los Claveles</h4>
+      <div className="pl-5 flex flex-col gap-4 w-full">
+        <div className="w-full flex gap-3 justify-start items-center align-middle">
+          <label>Ausente:</label>
+          <Checkbox defaultSelected />
+        </div>
+        <div className="w-full flex gap-3 justify-start items-center align-middle">
+          <TimeInput isReadOnly label="Inicio" defaultValue={new Time(8, 0)} />
+          <TimeInput isReadOnly label="Fin" defaultValue={new Time(5, 0)} />
+        </div>
+        <div className="w-full flex gap-3 justify-start items-center align-middle">
+          <Textarea
+            label="Queja:"
+            placeholder="(Opcional)"
+            className="max-w-full"
+          />
+        </div>
+      </div>
     </div>
   );
 }
@@ -42,11 +53,17 @@ export default function NavBar() {
         </Drawer>
       )}
       <div className="grid gap-5 grid-rows-[2fr 1fr] w-full h-full text-white p-6">
-        <div className="w-full flex justify-between items-center">
-          <Icon onClick={changeOpen} icon="tabler:menu-2" width={25} />
+        <div className="w-full flex justify-between lg:justify-center items-center">
+          <Icon
+            onClick={changeOpen}
+            icon="tabler:menu-2"
+            className="lg:hidden"
+            width={25}
+          />
           <h5>5 May</h5>
           <Icon
             icon="streamline:interface-setting-menu-horizontal-navigation-dots-three-circle-button-horizontal-menu"
+            className="lg:hidden"
             width={20}
           />
         </div>
@@ -58,7 +75,7 @@ export default function NavBar() {
           <Button color="secondary" onPress={onOpen}>
             Agregar día
           </Button>
-          <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+          <Modal size="full" isOpen={isOpen} onOpenChange={onOpenChange}>
             <ModalContent>
               {(onClose) => (
                 <>
@@ -66,8 +83,11 @@ export default function NavBar() {
                     Agregar día:
                   </ModalHeader>
                   <ModalBody className="">
-                    <section className="h-[400px] overflow-y-scroll flex flex-col gap-5 p-1">
-                      <Select label="Selecciona una ficha" className="max-w-xs">
+                    <section className="overflow-y-scroll flex flex-col gap-5 p-1">
+                      <Select
+                        label="Selecciona una ficha"
+                        className="max-w-full"
+                      >
                         {[
                           { label: "Ficha 18", value: "f18" },
                           { label: "Ficha 21", value: "f21" },
@@ -79,7 +99,6 @@ export default function NavBar() {
                           </SelectItem>
                         ))}
                       </Select>
-                      <EachPersonForm></EachPersonForm>
                       <EachPersonForm></EachPersonForm>
                       <EachPersonForm></EachPersonForm>
                     </section>

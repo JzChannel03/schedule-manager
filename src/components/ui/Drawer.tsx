@@ -44,7 +44,7 @@ const Drawer = ({
         {title}
         <Icon
           icon="mingcute:close-circle-fill"
-          className="absolute top-[31px] right-8"
+          className="absolute top-[31px] right-8 cursor-pointer"
           onClick={changeOpen}
           width={25}
         />

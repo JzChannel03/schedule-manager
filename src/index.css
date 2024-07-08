@@ -4,8 +4,10 @@
 @tailwind utilities;
 
 * {
+  -ms-overflow-style: none; /* IE y Edge */
   box-sizing: border-box;
   font-family: "Varela Round", sans-serif;
+  scrollbar-width: none; /* Firefox */
   user-select: none;
 }
 
@@ -13,6 +15,11 @@ main {
   background-color: #5781f3;
   height: 100vh;
   width: 100vw;
+}
+
+body::-webkit-scrollbar,
+.scrollable::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 h1 {
